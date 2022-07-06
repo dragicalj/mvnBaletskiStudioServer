@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Properties;
 
+import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
 import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
 import rs.ac.bg.fon.nprog.niti.ServerskaNit;
+import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 
 public class Kontroler {
 	
@@ -75,5 +78,11 @@ public class Kontroler {
         formaPodesavanja.getTxtUsername().setText(properties.getProperty("username"));
         formaPodesavanja.getTxtPassword().setText(properties.getProperty("password"));
         formaPodesavanja.getTxtPort().setText(properties.getProperty("port"));
+    }
+    
+    public ApstraktniDomenskiObjekat login(ApstraktniDomenskiObjekat ado) throws Exception {
+        ApstraktnaSO so = new LoginSO();
+        so.execute(ado);
+        return ((LoginSO) so).getAdo();
     }
 }
