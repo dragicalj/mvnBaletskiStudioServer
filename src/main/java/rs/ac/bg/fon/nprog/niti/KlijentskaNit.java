@@ -6,10 +6,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import rs.ac.bg.fon.nprog.domen.Administrator;
+import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.kontroler.Kontroler;
 import rs.ac.bg.fon.nprog.transfer.Odgovor;
 import rs.ac.bg.fon.nprog.transfer.Operacije;
 import rs.ac.bg.fon.nprog.transfer.Posiljalac;
 import rs.ac.bg.fon.nprog.transfer.Primalac;
+import rs.ac.bg.fon.nprog.transfer.TipOdgovora;
 import rs.ac.bg.fon.nprog.transfer.Zahtev;
 
 public class KlijentskaNit extends Thread{
@@ -45,10 +48,26 @@ public class KlijentskaNit extends Thread{
         Odgovor odgovor = new Odgovor();
         switch (operation) {
             case Operacije.LOGIN:
-                //odgovor = login(zahtev);
+                odgovor = login(zahtev);
                 return odgovor;
             
         }
         return null;
+    }
+    
+    private Odgovor login(Zahtev zahtev) {
+        Administrator administrator = (Administrator) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            ApstraktniDomenskiObjekat ado = Kontroler.getInstance().login(administrator);
+            odgovor.setRezultat(administrator);
+            this.trenutniAdministrator = administrator;
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+
     }
 }
