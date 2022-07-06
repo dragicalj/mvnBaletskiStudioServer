@@ -2,11 +2,13 @@ package rs.ac.bg.fon.nprog.kontroler;
 
 import java.awt.Color;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Properties;
 
 import rs.ac.bg.fon.nprog.forme.FormaMain;
+import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
 import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
 import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 
@@ -51,5 +53,27 @@ public class Kontroler {
         formaMain.getBtnZaustavi().setEnabled(false);
         formaMain.getTxtStatus().setText("Server je zaustavljen");
         formaMain.getTxtStatus().setForeground(Color.RED);
+    }
+    
+    public void setFormaMain(FormaMain formaMain) {
+		this.formaMain = formaMain;
+	}
+    
+    public void konfigurisiBazu(String url, String username, String password, String port) throws IOException {
+        Properties properties = new Properties();
+        properties.setProperty("url", url);
+        properties.setProperty("username", username);
+        properties.setProperty("password", password);
+        properties.setProperty("port", port);
+        properties.store(new FileOutputStream(PodaciZaKonfiguraciju.PATH), "");
+    }
+
+    public void procitajKonfiguracijuBaze(FormaPodesavanja formaPodesavanja) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(PodaciZaKonfiguraciju.PATH));
+        formaPodesavanja.getTxtUrl().setText(properties.getProperty("url"));
+        formaPodesavanja.getTxtUsername().setText(properties.getProperty("username"));
+        formaPodesavanja.getTxtPassword().setText(properties.getProperty("password"));
+        formaPodesavanja.getTxtPort().setText(properties.getProperty("port"));
     }
 }
