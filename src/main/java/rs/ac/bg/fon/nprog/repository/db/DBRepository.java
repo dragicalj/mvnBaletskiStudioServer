@@ -1,6 +1,8 @@
 package rs.ac.bg.fon.nprog.repository.db;
 
-public interface DBRepository {
+import rs.ac.bg.fon.nprog.repository.Repository;
+
+public interface DBRepository extends Repository{
 	
 	 	default public void uspostaviKonekciju() throws Exception{
 	        DBKonekcije.getInstance().getConnection();
