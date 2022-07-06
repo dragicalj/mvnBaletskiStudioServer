@@ -9,13 +9,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
-//import kontroler.Kontroler;
-//import niti.ServerskaNit;
+
+import rs.ac.bg.fon.nprog.kontroler.Kontroler;
+import rs.ac.bg.fon.nprog.niti.ServerskaNit;
+
 
 
 public class FormaMain extends javax.swing.JFrame {
     
-    //private ServerskaNit serverskaNit;
+    private ServerskaNit serverskaNit;
 
     /**
      * Creates new form ServerForm
@@ -51,14 +53,14 @@ public class FormaMain extends javax.swing.JFrame {
         btnPokreni.setText("Pokreni server");
         btnPokreni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //btnPokreniActionPerformed(evt);
+                btnPokreniActionPerformed(evt);
             }
         });
 
         btnZaustavi.setText("Zaustavi server");
         btnZaustavi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //btnZaustaviActionPerformed(evt);
+                btnZaustaviActionPerformed(evt);
             }
         });
 
@@ -112,6 +114,24 @@ public class FormaMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
+    
+
+    private void btnPokreniActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        try {
+            Kontroler.getInstance().pokreniServer(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Neuspesno pokretanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }                                          
+
+    private void btnZaustaviActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        try {
+            Kontroler.getInstance().zaustaviServer(this);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Neuspesno zaustavljanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }                                           
 
                                       
 
