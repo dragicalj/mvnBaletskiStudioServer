@@ -25,7 +25,7 @@ public class FormaMain extends javax.swing.JFrame {
     public FormaMain() {
         initComponents();
         btnZaustavi.setEnabled(false);
-        //Kontroler.getInstance().setFormaMain(this);
+        Kontroler.getInstance().setFormaMain(this);
     }
 
     /**
@@ -136,7 +136,7 @@ public class FormaMain extends javax.swing.JFrame {
                                       
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        //new FormaPodesavanja().setVisible(true);
+        new FormaPodesavanja().setVisible(true);
     }                                          
 
     /**
@@ -188,13 +188,13 @@ public class FormaMain extends javax.swing.JFrame {
     private javax.swing.JTextField txtStatus;
     // End of variables declaration                   
 
-    /*public ServerskaNit getServerskaNit() {
+    public ServerskaNit getServerskaNit() {
         return serverskaNit;
     }
 
     public void setServerskaNit(ServerskaNit serverskaNit) {
         this.serverskaNit = serverskaNit;
-    }*/
+    }
 
     public JButton getBtnPokreni() {
         return btnPokreni;

@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 //import kontroler.Kontroler;
 
+import rs.ac.bg.fon.nprog.kontroler.Kontroler;
+
 
 public class FormaPodesavanja extends javax.swing.JDialog {
 
@@ -49,7 +51,7 @@ public class FormaPodesavanja extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
-                //formWindowOpened(evt);
+                formWindowOpened(evt);
             }
         });
 
@@ -70,7 +72,7 @@ public class FormaPodesavanja extends javax.swing.JDialog {
         btnSacuvaj.setText("Sacuvaj");
         btnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //btnSacuvajActionPerformed(evt);
+                btnSacuvajActionPerformed(evt);
             }
         });
 
@@ -131,7 +133,28 @@ public class FormaPodesavanja extends javax.swing.JDialog {
         pack();
     }// </editor-fold>                        
 
-                                  
+
+    private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String url = txtUrl.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String port=txtPort.getText();
+        try {
+            Kontroler.getInstance().konfigurisiBazu(url, username, password,port);
+            JOptionPane.showMessageDialog(this, "Uspesno cuvanje konfiguracije");
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(this, "Neuspesno cuvanje konfiguracije");
+        }
+    }                                          
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+        try {
+            prepare();
+        } catch (IOException ex) {
+            Logger.getLogger(FormaPodesavanja.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                 
+                             
 
     private void txtUrlActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
@@ -191,7 +214,10 @@ public class FormaPodesavanja extends javax.swing.JDialog {
     private javax.swing.JTextField txtUrl;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration                   
-
+    
+    private void prepare() throws IOException {
+        Kontroler.getInstance().procitajKonfiguracijuBaze(this);
+    }
     
     public JButton getBtnSacuvaj() {
         return btnSacuvaj;
