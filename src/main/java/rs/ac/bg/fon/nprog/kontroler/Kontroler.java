@@ -20,6 +20,7 @@ import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiSveBaletskeGrupeSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.KreirajBaletskogIgracaSO;
+import rs.ac.bg.fon.nprog.operacije.baletskiigrac.PronadjiBaletskeIgraceSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.VratiSveBaletskeIgraceSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.ObrisiKoreografaSO;
@@ -149,5 +150,11 @@ public class Kontroler {
         ApstraktnaSO so=new VratiSveBaletskeIgraceSO();
         so.execute(new BaletskiIgrac());
         return ((VratiSveBaletskeIgraceSO)so).getListaBaletskihIgraca();
+    }
+    
+    public List<ApstraktniDomenskiObjekat> pronadjiBaletskeIgrace(BaletskiIgrac baletskiIgrac) throws Exception {
+        ApstraktnaSO so=new PronadjiBaletskeIgraceSO();
+        so.execute(baletskiIgrac);
+        return ((PronadjiBaletskeIgraceSO)so).getListaBaletskihIgraca();
     }
 }

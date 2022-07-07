@@ -80,6 +80,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.UCITAJ_BALETSKEIGRACE:
                 odgovor = ucitajBaletskeIgrace();
                 return odgovor;
+            case Operacije.PRONADJI_BALETSKEIGRACE:
+                odgovor = pronadjiBaletskeIgrace(zahtev);
+                return odgovor;    
         }
         return null;
     }
@@ -226,6 +229,22 @@ public class KlijentskaNit extends Thread{
         try {
             List<ApstraktniDomenskiObjekat> baletskiIgraci = Kontroler.getInstance().vratiSveBaletskeIgrace();
             odgovor.setRezultat(baletskiIgraci);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor pronadjiBaletskeIgrace(Zahtev zahtev) {
+        List<ApstraktniDomenskiObjekat> lista;
+        BaletskiIgrac baletskiIgrac = (BaletskiIgrac) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            lista=Kontroler.getInstance().pronadjiBaletskeIgrace(baletskiIgrac);
+            odgovor.setRezultat(lista);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
