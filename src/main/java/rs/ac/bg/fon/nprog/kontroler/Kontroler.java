@@ -14,6 +14,7 @@ import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
 import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
+import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 
 public class Kontroler {
 	
@@ -84,5 +85,11 @@ public class Kontroler {
         ApstraktnaSO so = new LoginSO();
         so.execute(ado);
         return ((LoginSO) so).getAdo();
+    }
+    
+    public Long kreirajKoreografa(ApstraktniDomenskiObjekat ado) throws Exception {
+        ApstraktnaSO so = new KreirajKoreografaSO();
+        so.execute(ado);
+        return ((KreirajKoreografaSO) so).getIndeks();
     }
 }
