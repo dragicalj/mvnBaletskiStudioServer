@@ -70,6 +70,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.OBRISI_KOREOGRAFA:
                 odgovor = obrisiKoreografa(zahtev);
                 return odgovor; 
+            case Operacije.UCITAJ_BALETSKEGRUPE:
+                odgovor = ucitajBaletskeGrupe();
+                return odgovor;
         }
         return null;
     }
@@ -180,5 +183,18 @@ public class KlijentskaNit extends Thread{
         }
         return odgovor;
     }
-
+    
+    private Odgovor ucitajBaletskeGrupe() {
+        Odgovor odgovor=new Odgovor();
+        try {
+            List<ApstraktniDomenskiObjekat> baletskeGrupe = Kontroler.getInstance().vratiSveBaletskeGrupe();
+            odgovor.setRezultat(baletskeGrupe);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
 }

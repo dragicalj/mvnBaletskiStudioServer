@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
@@ -16,6 +17,7 @@ import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
 import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
+import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiSveBaletskeGrupeSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.ObrisiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
@@ -126,5 +128,11 @@ public class Kontroler {
     public void obrisiKoreografa(Koreograf koreograf) throws Exception {
         ApstraktnaSO so=new ObrisiKoreografaSO();
         so.execute(koreograf);
+    }
+    
+    public List<ApstraktniDomenskiObjekat> vratiSveBaletskeGrupe() throws Exception {
+        ApstraktnaSO so=new VratiSveBaletskeGrupeSO();
+        so.execute(new BaletskaGrupa());
+        return ((VratiSveBaletskeGrupeSO)so).getListaBaletskihGrupa();
     }
 }
