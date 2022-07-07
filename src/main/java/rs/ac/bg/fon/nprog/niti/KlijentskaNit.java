@@ -2,6 +2,7 @@ package rs.ac.bg.fon.nprog.niti;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +55,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.KREIRAJ_KOREOGRAFA:
                 odgovor = kreirajKoreografa(zahtev);
                 return odgovor;
+            case Operacije.UCITAJ_KOREOGRAFE:
+                odgovor = ucitajKoreografe();
+                return odgovor;
             
         }
         return null;
@@ -90,5 +94,18 @@ public class KlijentskaNit extends Thread{
         }
         return odgovor;
     }
-
+    
+    private Odgovor ucitajKoreografe() {
+        Odgovor odgovor=new Odgovor();
+        try {
+            List<ApstraktniDomenskiObjekat> koreografi = Kontroler.getInstance().vratiSveKoreografe();
+            odgovor.setRezultat(koreografi);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
 }
