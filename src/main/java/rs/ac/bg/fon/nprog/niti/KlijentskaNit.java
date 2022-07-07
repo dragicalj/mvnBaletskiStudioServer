@@ -61,6 +61,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.PRONADJI_KOREOGRAFE:
                 odgovor = pronadjiKoreografe(zahtev);
                 return odgovor; 
+            case Operacije.UCITAJ_KOREOGRAFA:
+                odgovor = ucitajKoreografa(zahtev);
+                return odgovor; 
             
         }
         return null;
@@ -120,6 +123,21 @@ public class KlijentskaNit extends Thread{
             lista = Kontroler.getInstance().pronadjiKoreografe(koreograf);
             
             odgovor.setRezultat(lista);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor ucitajKoreografa(Zahtev zahtev) {
+        Koreograf koreograf = (Koreograf) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstance().vratiKoreografa(koreograf);
+            odgovor.setRezultat(koreograf);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
