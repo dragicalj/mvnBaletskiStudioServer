@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import rs.ac.bg.fon.nprog.domen.Administrator;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.kontroler.Kontroler;
 import rs.ac.bg.fon.nprog.transfer.Odgovor;
@@ -72,6 +73,9 @@ public class KlijentskaNit extends Thread{
                 return odgovor; 
             case Operacije.UCITAJ_BALETSKEGRUPE:
                 odgovor = ucitajBaletskeGrupe();
+                return odgovor;
+            case Operacije.KREIRAJ_BALETSKOGIGRACA:
+                odgovor = kreirajBaletskogIgraca(zahtev);
                 return odgovor;
         }
         return null;
@@ -189,6 +193,22 @@ public class KlijentskaNit extends Thread{
         try {
             List<ApstraktniDomenskiObjekat> baletskeGrupe = Kontroler.getInstance().vratiSveBaletskeGrupe();
             odgovor.setRezultat(baletskeGrupe);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor kreirajBaletskogIgraca(Zahtev zahtev) {
+        BaletskiIgrac baletskiIgrac = (BaletskiIgrac) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Long indeks = Kontroler.getInstance().kreirajBaletskogIgraca(baletskiIgrac);
+            baletskiIgrac.setBaletskiIgracId(indeks);
+            odgovor.setRezultat(baletskiIgrac);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();

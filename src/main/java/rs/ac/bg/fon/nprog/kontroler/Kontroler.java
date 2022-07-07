@@ -18,6 +18,7 @@ import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiSveBaletskeGrupeSO;
+import rs.ac.bg.fon.nprog.operacije.baletskiigrac.KreirajBaletskogIgracaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.ObrisiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
@@ -134,5 +135,11 @@ public class Kontroler {
         ApstraktnaSO so=new VratiSveBaletskeGrupeSO();
         so.execute(new BaletskaGrupa());
         return ((VratiSveBaletskeGrupeSO)so).getListaBaletskihGrupa();
+    }
+    
+    public Long kreirajBaletskogIgraca(ApstraktniDomenskiObjekat ado) throws Exception{
+        ApstraktnaSO so = new KreirajBaletskogIgracaSO();
+        so.execute(ado);
+        return ((KreirajBaletskogIgracaSO) so).getIndeks();
     }
 }
