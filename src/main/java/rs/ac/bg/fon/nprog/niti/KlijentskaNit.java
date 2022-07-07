@@ -77,6 +77,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.KREIRAJ_BALETSKOGIGRACA:
                 odgovor = kreirajBaletskogIgraca(zahtev);
                 return odgovor;
+            case Operacije.UCITAJ_BALETSKEIGRACE:
+                odgovor = ucitajBaletskeIgrace();
+                return odgovor;
         }
         return null;
     }
@@ -209,6 +212,20 @@ public class KlijentskaNit extends Thread{
             Long indeks = Kontroler.getInstance().kreirajBaletskogIgraca(baletskiIgrac);
             baletskiIgrac.setBaletskiIgracId(indeks);
             odgovor.setRezultat(baletskiIgrac);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor ucitajBaletskeIgrace() {
+        Odgovor odgovor=new Odgovor();
+        try {
+            List<ApstraktniDomenskiObjekat> baletskiIgraci = Kontroler.getInstance().vratiSveBaletskeIgrace();
+            odgovor.setRezultat(baletskiIgraci);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();

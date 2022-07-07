@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
+import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
@@ -19,6 +20,7 @@ import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiSveBaletskeGrupeSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.KreirajBaletskogIgracaSO;
+import rs.ac.bg.fon.nprog.operacije.baletskiigrac.VratiSveBaletskeIgraceSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.ObrisiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
@@ -141,5 +143,11 @@ public class Kontroler {
         ApstraktnaSO so = new KreirajBaletskogIgracaSO();
         so.execute(ado);
         return ((KreirajBaletskogIgracaSO) so).getIndeks();
+    }
+    
+    public List<ApstraktniDomenskiObjekat> vratiSveBaletskeIgrace() throws Exception {
+        ApstraktnaSO so=new VratiSveBaletskeIgraceSO();
+        so.execute(new BaletskiIgrac());
+        return ((VratiSveBaletskeIgraceSO)so).getListaBaletskihIgraca();
     }
 }
