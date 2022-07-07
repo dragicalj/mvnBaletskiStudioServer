@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import rs.ac.bg.fon.nprog.domen.Administrator;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.kontroler.Kontroler;
 import rs.ac.bg.fon.nprog.transfer.Odgovor;
 import rs.ac.bg.fon.nprog.transfer.Operacije;
@@ -50,6 +51,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.LOGIN:
                 odgovor = login(zahtev);
                 return odgovor;
+            case Operacije.KREIRAJ_KOREOGRAFA:
+                odgovor = kreirajKoreografa(zahtev);
+                return odgovor;
             
         }
         return null;
@@ -70,4 +74,21 @@ public class KlijentskaNit extends Thread{
         return odgovor;
 
     }
+    
+    private Odgovor kreirajKoreografa(Zahtev zahtev) {
+        Koreograf koreograf = (Koreograf) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Long indeks = Kontroler.getInstance().kreirajKoreografa(koreograf);
+            koreograf.setKoreografId(indeks);
+            odgovor.setRezultat(koreograf);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
 }
