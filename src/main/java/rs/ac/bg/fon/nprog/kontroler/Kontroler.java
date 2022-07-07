@@ -17,6 +17,7 @@ import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
+import rs.ac.bg.fon.nprog.operacije.koreograf.PronadjiKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
 
 public class Kontroler {
@@ -100,5 +101,11 @@ public class Kontroler {
         ApstraktnaSO so=new VratiSveKoreografeSO();
         so.execute(new Koreograf());
         return ((VratiSveKoreografeSO)so).getListaKoreografa();
+    }
+    
+    public List<ApstraktniDomenskiObjekat> pronadjiKoreografe(Koreograf koreograf) throws Exception {
+        ApstraktnaSO so=new PronadjiKoreografeSO();
+        so.execute(koreograf);
+        return ((PronadjiKoreografeSO)so).getListaKoreografa();
     }
 }
