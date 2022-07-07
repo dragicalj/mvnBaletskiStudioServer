@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.List;
 import java.util.Properties;
 
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
 import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
@@ -15,6 +17,7 @@ import rs.ac.bg.fon.nprog.niti.ServerskaNit;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.operacije.administrator.LoginSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
+import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
 
 public class Kontroler {
 	
@@ -91,5 +94,11 @@ public class Kontroler {
         ApstraktnaSO so = new KreirajKoreografaSO();
         so.execute(ado);
         return ((KreirajKoreografaSO) so).getIndeks();
+    }
+    
+    public List<ApstraktniDomenskiObjekat> vratiSveKoreografe() throws Exception {
+        ApstraktnaSO so=new VratiSveKoreografeSO();
+        so.execute(new Koreograf());
+        return ((VratiSveKoreografeSO)so).getListaKoreografa();
     }
 }
