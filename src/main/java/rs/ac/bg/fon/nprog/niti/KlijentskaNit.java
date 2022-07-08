@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import rs.ac.bg.fon.nprog.domen.Administrator;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
+import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.kontroler.Kontroler;
@@ -91,6 +92,9 @@ public class KlijentskaNit extends Thread{
                 return odgovor; 
             case Operacije.ZAPAMTI_UPLATEBALETSKOGIGRACA:
                 odgovor = zapamtiUplateBaletskogIgraca(zahtev);
+                return odgovor;
+            case Operacije.KREIRAJ_BALETSKUGRUPU:
+                odgovor = kreirajBaletskuGrupu(zahtev);
                 return odgovor;
         }
         return null;
@@ -308,4 +312,21 @@ public class KlijentskaNit extends Thread{
         }
         return odgovor;
     }
+    
+    private Odgovor kreirajBaletskuGrupu(Zahtev zahtev) {
+        BaletskaGrupa baletskaGrupa = (BaletskaGrupa) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Long indeks = Kontroler.getInstance().kreirajBaletskuGrupu(baletskaGrupa);
+            baletskaGrupa.setBaletskaGrupaId(indeks);
+            odgovor.setRezultat(baletskaGrupa);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
 }
