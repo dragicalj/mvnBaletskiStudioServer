@@ -36,6 +36,7 @@ import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PronadjiKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
+import rs.ac.bg.fon.nprog.operacije.lokacija.KreirajLokacijuSO;
 import rs.ac.bg.fon.nprog.operacije.nastup.VratiSveNastupeSO;
 
 public class Kontroler {
@@ -211,5 +212,11 @@ public class Kontroler {
     public void zapamtiUplateBaletskogIgraca(BaletskaGrupa baletskaGrupa) throws Exception {
         ApstraktnaSO so=new ZapamtiNastupeBaletskeGrupeSO();
         so.execute(baletskaGrupa);
+    }
+    
+    public Long kreirajLokaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+        ApstraktnaSO so = new KreirajLokacijuSO();
+        so.execute(ado);
+        return ((KreirajLokacijuSO) so).getIndeks();
     }
 }

@@ -11,6 +11,7 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
+import rs.ac.bg.fon.nprog.domen.Lokacija;
 import rs.ac.bg.fon.nprog.kontroler.Kontroler;
 import rs.ac.bg.fon.nprog.transfer.Odgovor;
 import rs.ac.bg.fon.nprog.transfer.Operacije;
@@ -107,6 +108,9 @@ public class KlijentskaNit extends Thread{
                 return odgovor; 
             case Operacije.ZAPAMTI_NASTUPEBALETSKEGRUPE:
                 odgovor = zapamtiNastupeBaletskeGrupe(zahtev);
+                return odgovor;
+            case Operacije.KREIRAJ_LOKACIJU:
+                odgovor = kreirajLokaciju(zahtev);
                 return odgovor;
         }
         return null;
@@ -390,6 +394,22 @@ public class KlijentskaNit extends Thread{
         Odgovor odgovor = new Odgovor();
         try {
             Kontroler.getInstance().zapamtiUplateBaletskogIgraca(baletskaGrupa);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor kreirajLokaciju(Zahtev zahtev) {
+        Lokacija lokacija = (Lokacija) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Long indeks = Kontroler.getInstance().kreirajLokaciju(lokacija);
+            lokacija.setLokacijaId(indeks);
+            odgovor.setRezultat(lokacija);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
