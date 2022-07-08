@@ -24,6 +24,7 @@ import rs.ac.bg.fon.nprog.operacije.baletskiigrac.PromeniPodatkeBaletskogIgracaS
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.PronadjiBaletskeIgraceSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.VratiBaletskogIgracaSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.VratiSveBaletskeIgraceSO;
+import rs.ac.bg.fon.nprog.operacije.baletskiigrac.ZapamtiUplateBaletskogIgracaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.KreirajKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.ObrisiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
@@ -170,5 +171,10 @@ public class Kontroler {
         so.execute(baletskiIgrac);
         //System.out.println(((VratiBaletskogIgracaSO)so).getBaletskiIgrac().getListaUplata());
         return ((VratiBaletskogIgracaSO)so).getBaletskiIgrac();
+    }
+    
+    public void zapamtiUplateBaletskogIgraca(BaletskiIgrac baletskiIgrac) throws Exception {
+        ApstraktnaSO so=new ZapamtiUplateBaletskogIgracaSO();
+        so.execute(baletskiIgrac);
     }
 }
