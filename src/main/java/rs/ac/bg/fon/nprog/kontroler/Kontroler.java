@@ -12,6 +12,7 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
+import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
 import rs.ac.bg.fon.nprog.konfiguracija.PodaciZaKonfiguraciju;
@@ -22,6 +23,7 @@ import rs.ac.bg.fon.nprog.operacije.baletskagrupa.KreirajBaletskuGrupuSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.PromeniPodatkeBaletskeGrupeSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiBaletskuGrupuSO;
 import rs.ac.bg.fon.nprog.operacije.baletskagrupa.VratiSveBaletskeGrupeSO;
+import rs.ac.bg.fon.nprog.operacije.baletskagrupa.ZapamtiNastupeBaletskeGrupeSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.KreirajBaletskogIgracaSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.PromeniPodatkeBaletskogIgracaSO;
 import rs.ac.bg.fon.nprog.operacije.baletskiigrac.PronadjiBaletskeIgraceSO;
@@ -34,6 +36,7 @@ import rs.ac.bg.fon.nprog.operacije.koreograf.PromeniKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.PronadjiKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
+import rs.ac.bg.fon.nprog.operacije.nastup.VratiSveNastupeSO;
 
 public class Kontroler {
 	
@@ -196,6 +199,17 @@ public class Kontroler {
 
     public void promeniPodatkeGrupe(BaletskaGrupa baletskaGrupa) throws Exception {
         ApstraktnaSO so=new PromeniPodatkeBaletskeGrupeSO();
+        so.execute(baletskaGrupa);
+    }
+    
+    public List<ApstraktniDomenskiObjekat> vratiSveNastupe() throws Exception {
+        ApstraktnaSO so=new VratiSveNastupeSO();
+        so.execute(new Nastup());
+        return ((VratiSveNastupeSO)so).getListaNastupa();
+    }    
+
+    public void zapamtiUplateBaletskogIgraca(BaletskaGrupa baletskaGrupa) throws Exception {
+        ApstraktnaSO so=new ZapamtiNastupeBaletskeGrupeSO();
         so.execute(baletskaGrupa);
     }
 }

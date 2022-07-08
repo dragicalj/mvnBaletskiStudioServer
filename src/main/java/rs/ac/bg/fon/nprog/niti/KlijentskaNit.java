@@ -102,6 +102,12 @@ public class KlijentskaNit extends Thread{
             case Operacije.PROMENI_PODATKEBALETSKEGRUPE:
                 odgovor = promeniPodatkeGrupe(zahtev);
                 return odgovor;
+            case Operacije.UCITAJ_NASTUPE:
+                odgovor = ucitajNastupe(zahtev);
+                return odgovor; 
+            case Operacije.ZAPAMTI_NASTUPEBALETSKEGRUPE:
+                odgovor = zapamtiNastupeBaletskeGrupe(zahtev);
+                return odgovor;
         }
         return null;
     }
@@ -356,6 +362,34 @@ public class KlijentskaNit extends Thread{
         Odgovor odgovor = new Odgovor();
         try {
             Kontroler.getInstance().promeniPodatkeGrupe(baletskaGrupa);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor ucitajNastupe(Zahtev zahtev) {
+        Odgovor odgovor=new Odgovor();
+        try {
+            List<ApstraktniDomenskiObjekat> nastupi = Kontroler.getInstance().vratiSveNastupe();
+            odgovor.setRezultat(nastupi);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor zapamtiNastupeBaletskeGrupe(Zahtev zahtev) {
+        BaletskaGrupa baletskaGrupa = (BaletskaGrupa) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstance().zapamtiUplateBaletskogIgraca(baletskaGrupa);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
