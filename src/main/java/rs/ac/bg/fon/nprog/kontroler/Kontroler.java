@@ -12,6 +12,7 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
+import rs.ac.bg.fon.nprog.domen.Lokacija;
 import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.forme.FormaMain;
 import rs.ac.bg.fon.nprog.forme.FormaPodesavanja;
@@ -37,6 +38,7 @@ import rs.ac.bg.fon.nprog.operacije.koreograf.PronadjiKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.lokacija.KreirajLokacijuSO;
+import rs.ac.bg.fon.nprog.operacije.lokacija.VratiSveLokacijeSO;
 import rs.ac.bg.fon.nprog.operacije.nastup.VratiSveNastupeSO;
 
 public class Kontroler {
@@ -218,5 +220,11 @@ public class Kontroler {
         ApstraktnaSO so = new KreirajLokacijuSO();
         so.execute(ado);
         return ((KreirajLokacijuSO) so).getIndeks();
+    }
+    
+    public List<ApstraktniDomenskiObjekat> vratiSveLokacije() throws Exception{
+        ApstraktnaSO so=new VratiSveLokacijeSO();
+        so.execute(new Lokacija());
+        return ((VratiSveLokacijeSO)so).getListaLokacija();
     }
 }

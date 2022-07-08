@@ -112,6 +112,9 @@ public class KlijentskaNit extends Thread{
             case Operacije.KREIRAJ_LOKACIJU:
                 odgovor = kreirajLokaciju(zahtev);
                 return odgovor;
+            case Operacije.UCITAJ_LOKACIJE:
+                odgovor = ucitajLokacije();
+                return odgovor;
         }
         return null;
     }
@@ -410,6 +413,20 @@ public class KlijentskaNit extends Thread{
             Long indeks = Kontroler.getInstance().kreirajLokaciju(lokacija);
             lokacija.setLokacijaId(indeks);
             odgovor.setRezultat(lokacija);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor ucitajLokacije() {
+        Odgovor odgovor=new Odgovor();
+        try {
+            List<ApstraktniDomenskiObjekat> lokacije = Kontroler.getInstance().vratiSveLokacije();
+            odgovor.setRezultat(lokacije);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
