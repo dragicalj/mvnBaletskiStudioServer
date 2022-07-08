@@ -96,6 +96,12 @@ public class KlijentskaNit extends Thread{
             case Operacije.KREIRAJ_BALETSKUGRUPU:
                 odgovor = kreirajBaletskuGrupu(zahtev);
                 return odgovor;
+            case Operacije.UCITAJ_BALETSKUGRUPU:
+                odgovor = ucitajBaletskuGrupu(zahtev);
+                return odgovor;
+            case Operacije.PROMENI_PODATKEBALETSKEGRUPE:
+                odgovor = promeniPodatkeGrupe(zahtev);
+                return odgovor;
         }
         return null;
     }
@@ -328,5 +334,34 @@ public class KlijentskaNit extends Thread{
         }
         return odgovor;
     }
+    
+    private Odgovor ucitajBaletskuGrupu(Zahtev zahtev) {
+        BaletskaGrupa baletskaGrupa = (BaletskaGrupa) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            BaletskaGrupa baletskaGrupa1=Kontroler.getInstance().vratiBaletskuGrupu(baletskaGrupa);
+            //System.out.println(baletskiIgrac1.getListaUplata());
+            odgovor.setRezultat(baletskaGrupa1);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
 
+    private Odgovor promeniPodatkeGrupe(Zahtev zahtev) {
+        BaletskaGrupa baletskaGrupa = (BaletskaGrupa) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstance().promeniPodatkeGrupe(baletskaGrupa);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
 }
