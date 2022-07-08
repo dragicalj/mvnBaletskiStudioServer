@@ -39,6 +39,7 @@ import rs.ac.bg.fon.nprog.operacije.koreograf.VratiKoreografaSO;
 import rs.ac.bg.fon.nprog.operacije.koreograf.VratiSveKoreografeSO;
 import rs.ac.bg.fon.nprog.operacije.lokacija.KreirajLokacijuSO;
 import rs.ac.bg.fon.nprog.operacije.lokacija.VratiSveLokacijeSO;
+import rs.ac.bg.fon.nprog.operacije.nastup.KreirajNastupSO;
 import rs.ac.bg.fon.nprog.operacije.nastup.VratiSveNastupeSO;
 
 public class Kontroler {
@@ -226,5 +227,11 @@ public class Kontroler {
         ApstraktnaSO so=new VratiSveLokacijeSO();
         so.execute(new Lokacija());
         return ((VratiSveLokacijeSO)so).getListaLokacija();
+    }
+    
+    public Long kreirajNastup(ApstraktniDomenskiObjekat ado) throws Exception{
+        ApstraktnaSO so = new KreirajNastupSO();
+        so.execute(ado);
+        return ((KreirajNastupSO) so).getIndeks();
     }
 }

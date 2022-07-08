@@ -12,6 +12,7 @@ import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.domen.Lokacija;
+import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.kontroler.Kontroler;
 import rs.ac.bg.fon.nprog.transfer.Odgovor;
 import rs.ac.bg.fon.nprog.transfer.Operacije;
@@ -114,6 +115,9 @@ public class KlijentskaNit extends Thread{
                 return odgovor;
             case Operacije.UCITAJ_LOKACIJE:
                 odgovor = ucitajLokacije();
+                return odgovor;
+            case Operacije.KREIRAJ_NASTUP:
+                odgovor = kreirajNastup(zahtev);
                 return odgovor;
         }
         return null;
@@ -427,6 +431,22 @@ public class KlijentskaNit extends Thread{
         try {
             List<ApstraktniDomenskiObjekat> lokacije = Kontroler.getInstance().vratiSveLokacije();
             odgovor.setRezultat(lokacije);
+            odgovor.setTipOdgovora(TipOdgovora.USPESNO);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            odgovor.setTipOdgovora(TipOdgovora.GRESKA);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+    
+    private Odgovor kreirajNastup(Zahtev zahtev) {
+        Nastup nastup = (Nastup) zahtev.getArgument();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Long indeks = Kontroler.getInstance().kreirajNastup(nastup);
+            nastup.setNastupId(indeks);
+            odgovor.setRezultat(nastup);
             odgovor.setTipOdgovora(TipOdgovora.USPESNO);
         } catch (Exception ex) {
             ex.printStackTrace();
