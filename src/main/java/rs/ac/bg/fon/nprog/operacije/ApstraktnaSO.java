@@ -11,7 +11,10 @@ public abstract class ApstraktnaSO {
     public ApstraktnaSO() {
         this.repository = new RepositoryDBGeneric();
     }
-
+    
+    public ApstraktnaSO(Repository repository) {
+        this.repository = repository;
+    }
     
     public void execute(Object param) throws Exception {
         try {
