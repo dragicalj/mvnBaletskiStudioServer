@@ -5,6 +5,7 @@ import java.sql.Date;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class KreirajKoreografaSO extends ApstraktnaSO{
 
@@ -15,7 +16,12 @@ public class KreirajKoreografaSO extends ApstraktnaSO{
     }
    
     
-    @Override
+    public KreirajKoreografaSO(Repository repository) {
+		super(repository);
+	}
+
+
+	@Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof Koreograf)) {
             throw new Exception("Prosledjeni objekat nije instanca klase Koreograf!");
