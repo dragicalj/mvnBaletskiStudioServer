@@ -11,8 +11,22 @@ import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
 
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za prikaz informacija konkretne baletske grupe. Iz baze
+ * podataka uzimaju se podaci potrebne baletske grupe i rezultat operacije je objekat klase BaletskaGrupa.
+ * 
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class VratiBaletskuGrupuSO extends ApstraktnaSO{
-    
+    /**
+     * Promenljiva u kojoj ce se cuvati odgovarajuca baletska grupa kao rezultat upita.
+     */
     private BaletskaGrupa baletskaGrupa;
     
     public VratiBaletskuGrupuSO() {
@@ -26,7 +40,11 @@ public class VratiBaletskuGrupuSO extends ApstraktnaSO{
     @Override
     protected void precondition(Object param) throws Exception {
     }
-
+    /**
+     * Metoda u kojoj se poziva operacija za vracanje konkretne baletske grupe po njenom identifikatoru.
+     * Baletska grupa ima svoje nastupe koji se takodje ucitavaju.
+     * Rezultat operacije je baletska grupa sa svim podacima i listom nastupa.
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         baletskaGrupa=(BaletskaGrupa) repository.vratiPoId((ApstraktniDomenskiObjekat)param);
