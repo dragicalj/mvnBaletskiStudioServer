@@ -9,11 +9,20 @@ import rs.ac.bg.fon.nprog.domen.BaletskaGrupaNastup;
 import rs.ac.bg.fon.nprog.domen.Lokacija;
 import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class VratiBaletskuGrupuSO extends ApstraktnaSO{
     
     private BaletskaGrupa baletskaGrupa;
-
+    
+    public VratiBaletskuGrupuSO() {
+    	super();
+    }
+    
+    public VratiBaletskuGrupuSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
     }

@@ -6,12 +6,20 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class VratiSveBaletskeGrupeSO extends ApstraktnaSO{
     
     private List<ApstraktniDomenskiObjekat> listaBaletskihGrupa;
-
-
+    
+    public VratiSveBaletskeGrupeSO() {
+    	super();
+    }
+    
+    public VratiSveBaletskeGrupeSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
     }

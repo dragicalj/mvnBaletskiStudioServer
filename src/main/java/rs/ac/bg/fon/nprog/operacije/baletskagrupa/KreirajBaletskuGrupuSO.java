@@ -3,6 +3,7 @@ package rs.ac.bg.fon.nprog.operacije.baletskagrupa;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class KreirajBaletskuGrupuSO extends ApstraktnaSO {
 
@@ -11,7 +12,11 @@ public class KreirajBaletskuGrupuSO extends ApstraktnaSO {
     public KreirajBaletskuGrupuSO() {
         super();
     }
-
+    
+    public KreirajBaletskuGrupuSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof BaletskaGrupa)) {
