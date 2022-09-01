@@ -6,11 +6,20 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.Lokacija;
 import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class VratiSveNastupeSO extends ApstraktnaSO{
     
     private List<ApstraktniDomenskiObjekat> listaNastupa;
-
+    
+    public VratiSveNastupeSO() {
+    	super();
+    }
+    
+    public VratiSveNastupeSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
     }

@@ -5,6 +5,7 @@ import java.util.Date;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class KreirajNastupSO extends ApstraktnaSO{
     
@@ -14,11 +15,14 @@ public class KreirajNastupSO extends ApstraktnaSO{
         super();
     }
     
+    public KreirajNastupSO(Repository repository) {
+		super(repository);
+	}
 
     @Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof Nastup)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase Koreograf!");
+            throw new Exception("Prosledjeni objekat nije instanca klase Nastup!");
         }
         Nastup nastup=(Nastup) param;
 
