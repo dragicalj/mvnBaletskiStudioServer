@@ -5,9 +5,18 @@ import java.util.Date;
 import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class PromeniPodatkeBaletskogIgracaSO extends ApstraktnaSO{
-
+	
+	public PromeniPodatkeBaletskogIgracaSO() {
+		super();
+	}
+	
+	public PromeniPodatkeBaletskogIgracaSO(Repository repository) {
+		super(repository);
+	}
+	
     @Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof BaletskiIgrac)) {

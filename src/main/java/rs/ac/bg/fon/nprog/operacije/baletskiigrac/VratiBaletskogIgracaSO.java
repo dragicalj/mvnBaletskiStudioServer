@@ -7,11 +7,20 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Uplata;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class VratiBaletskogIgracaSO extends ApstraktnaSO{
     
     private BaletskiIgrac baletskiIgrac;
-
+    
+    public VratiBaletskogIgracaSO() {
+    	super();
+    }
+    
+    public VratiBaletskogIgracaSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
     }
@@ -24,12 +33,12 @@ public class VratiBaletskogIgracaSO extends ApstraktnaSO{
         uplata.setBaletskiIgrac(baletskiIgrac);
         
         List<ApstraktniDomenskiObjekat> listaUplata=repository.vratiPoUslovu(uplata);
-        //System.out.println(listaUplata);
+        System.out.println(listaUplata);
         ArrayList<Uplata> uplate=new ArrayList<>();
         for (ApstraktniDomenskiObjekat apstraktniDomenskiObjekat : listaUplata) {
             uplate.add((Uplata)apstraktniDomenskiObjekat);
         }
-        //System.out.println(uplate);
+        System.out.println(uplate);
         baletskiIgrac.setListaUplata(uplate);
 
     }

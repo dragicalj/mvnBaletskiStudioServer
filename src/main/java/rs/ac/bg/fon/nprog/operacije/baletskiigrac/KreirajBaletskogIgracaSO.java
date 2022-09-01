@@ -7,6 +7,7 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Uplata;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class KreirajBaletskogIgracaSO extends ApstraktnaSO {
 
@@ -15,7 +16,11 @@ public class KreirajBaletskogIgracaSO extends ApstraktnaSO {
     public KreirajBaletskogIgracaSO() {
         super();
     }
-
+    
+    public KreirajBaletskogIgracaSO(Repository repository) {
+		super(repository);
+	}
+    
     @Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof BaletskiIgrac)) {
@@ -26,14 +31,6 @@ public class KreirajBaletskogIgracaSO extends ApstraktnaSO {
         if (baletskiIgrac.getDatumRodjenja().after(new Date())
                 || baletskiIgrac.getDatumRodjenja().equals(new Date())) {
             throw new Exception("Datum rodjenja mora biti pre danasnjeg datuma!");
-        }
-
-        if (baletskiIgrac.getListaUplata().isEmpty()) {
-            throw new Exception("Baletski igrac mora imati barem jednu uplatu!");
-        }
-        ArrayList<ApstraktniDomenskiObjekat> listaIgraca = (ArrayList<ApstraktniDomenskiObjekat>) repository.pronadji2(baletskiIgrac);
-        if (listaIgraca.size()+1 > baletskiIgrac.getBaletskaGrupa().getKapacitet()) {
-            throw new Exception("Kapacitet odabrane grupe je popunjen!");
         }
     }
 

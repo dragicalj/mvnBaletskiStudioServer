@@ -6,9 +6,18 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskiIgrac;
 import rs.ac.bg.fon.nprog.domen.Uplata;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
+import rs.ac.bg.fon.nprog.repository.Repository;
 
 public class ZapamtiUplateBaletskogIgracaSO extends ApstraktnaSO{
-
+	
+	public ZapamtiUplateBaletskogIgracaSO() {
+		super();
+	}
+	
+	public ZapamtiUplateBaletskogIgracaSO(Repository repository) {
+		super(repository);
+	}
+	
     @Override
     protected void precondition(Object param) throws Exception {
         if (!(param instanceof BaletskiIgrac)) {
@@ -17,9 +26,6 @@ public class ZapamtiUplateBaletskogIgracaSO extends ApstraktnaSO{
         BaletskiIgrac baletskiIgrac=(BaletskiIgrac) param;
        
         
-        if(baletskiIgrac.getListaUplata().isEmpty()){
-            throw new Exception("Baletski igrac mora imati barem jednu uplatu!");
-        }
     }
 
     @Override
