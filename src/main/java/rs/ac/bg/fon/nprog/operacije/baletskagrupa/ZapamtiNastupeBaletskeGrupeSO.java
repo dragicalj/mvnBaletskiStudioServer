@@ -6,7 +6,17 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupa;
 import rs.ac.bg.fon.nprog.domen.BaletskaGrupaNastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
-
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za pamcenje nastupa baletske grupe. Baletska grupa 
+ * sadrzi listu nastupa.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class ZapamtiNastupeBaletskeGrupeSO extends ApstraktnaSO{
 
     @Override
@@ -16,7 +26,9 @@ public class ZapamtiNastupeBaletskeGrupeSO extends ApstraktnaSO{
         }
         
     }
-
+    /**
+     * Metoda u kojoj se pamete nastupi konkretne baletske grupe u bazi podataka.
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         BaletskaGrupa baletskaGrupa= (BaletskaGrupa) param;
