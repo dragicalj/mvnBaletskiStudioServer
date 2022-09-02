@@ -9,8 +9,23 @@ import rs.ac.bg.fon.nprog.domen.Uplata;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
 
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za kreiranje baletskog igraca. Baletsk igrac se pamti
+ * u bazi podataka, a rezultat operacije je indeks kreiranog baletskog igraca. Baletski igrac sadrzi
+ * listu njegovih uplata clanarina. Uplate se takodje pamte u bazi podataka u odgovarajucoj tabeli.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class KreirajBaletskogIgracaSO extends ApstraktnaSO {
-
+	
+	/**
+	 * Promenljiva u kojoj se cuva indeks kreiranog baletskog igraca.
+	 */
     long indeks = -1;
 
     public KreirajBaletskogIgracaSO() {
@@ -33,7 +48,13 @@ public class KreirajBaletskogIgracaSO extends ApstraktnaSO {
             throw new Exception("Datum rodjenja mora biti pre danasnjeg datuma!");
         }
     }
-
+    /**
+     * Metoda u kojoj se poziva operacija za kreiranje sloga u bazi podataka i izvrsava odgovarajuci
+     * upit nad bazom podataka. Kreira se slog za baletskog igraca i slogovi za njegove uplate.
+     * 
+     * Rezultat upita je indeks kreiranog baletskog igraca.
+     * 
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         BaletskiIgrac baletskiIgrac = (BaletskiIgrac) param;
