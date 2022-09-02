@@ -7,8 +7,21 @@ import rs.ac.bg.fon.nprog.domen.Nastup;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
 
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za kreiranje nastupa. Nastup se pamti
+ * u bazi podataka, a rezultat operacije je indeks kreiranog nastupa.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class KreirajNastupSO extends ApstraktnaSO{
-    
+	/**
+	 * Promenljiva u kojoj se cuva indeks kreiranog nastupa.
+	 */
     long indeks=-1;
 
     public KreirajNastupSO() {
@@ -31,7 +44,13 @@ public class KreirajNastupSO extends ApstraktnaSO{
             throw new Exception("Datum nastupa mora biti posle danasnjeg datuma!");
         }
     }
-
+    /**
+     * Metoda u kojoj se poziva operacija za kreiranje sloga u bazi podataka i izvrsava odgovarajuci
+     * upit nad bazom podataka.
+     * 
+     * Rezultat upita je indeks kreiranog nastupa.
+     * 
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         indeks=repository.kreirajSlog((ApstraktniDomenskiObjekat)param);
