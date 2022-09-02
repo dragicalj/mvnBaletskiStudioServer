@@ -8,6 +8,17 @@ import rs.ac.bg.fon.nprog.domen.Uplata;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
 
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za pamcenje uplatabaletskog igraca. Operacija
+ * se izvrsava pozivom odgovarajuceg upita nad bazom podataka i nema nikavu povratnu vrednost.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class ZapamtiUplateBaletskogIgracaSO extends ApstraktnaSO{
 	
 	public ZapamtiUplateBaletskogIgracaSO() {
@@ -27,7 +38,12 @@ public class ZapamtiUplateBaletskogIgracaSO extends ApstraktnaSO{
        
         
     }
-
+    /**
+     * Metoda u kojoj se poziva operacija za promenu odgovarajuceg sloga u bazi podataka i izvrsava 
+     * odgovarajuci upit nad bazom podataka. PRoverava se da li isti slog postoji u bazi, ako ne postoji
+     * kreira se. Takodje, vrsi se provera da li je treba neki slog obrisati.
+     * 
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         BaletskiIgrac baletskiIgrac= (BaletskiIgrac) param;
