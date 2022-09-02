@@ -7,6 +7,17 @@ import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
 
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za promenu podataka postojeceg koreografa. Operacija
+ * se izvrsava pozivom odgovarajuceg upita nad bazom podataka i nema nikavu povratnu vrednost.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class PromeniKoreografaSO extends ApstraktnaSO{
 	
 	public PromeniKoreografaSO() {
@@ -29,7 +40,11 @@ public class PromeniKoreografaSO extends ApstraktnaSO{
             throw new Exception("Datum rodjenja mora biti pre danasnjeg datuma!");
         }
     }
-
+    /**
+     * Metoda u kojoj se poziva operacija za promenu odgovarajuceg sloga u bazi podataka i izvrsava 
+     * odgovarajuci upit nad bazom podataka.
+     * 
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         repository.promeni((ApstraktniDomenskiObjekat) param);

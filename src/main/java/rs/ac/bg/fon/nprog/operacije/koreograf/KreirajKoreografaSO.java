@@ -6,9 +6,21 @@ import rs.ac.bg.fon.nprog.domen.ApstraktniDomenskiObjekat;
 import rs.ac.bg.fon.nprog.domen.Koreograf;
 import rs.ac.bg.fon.nprog.operacije.ApstraktnaSO;
 import rs.ac.bg.fon.nprog.repository.Repository;
-
+/**
+ * 
+ * Klasa koja predstavlja sistemsku operaciju za kreiranje koreografa. Koreograf se pamti
+ * u bazi podataka, a rezultat operacije je indeks kreiranog koreografa.
+ * 
+ * Klasa nasledjuje klasu koja predstavlja apstraktnu sistemsku operaciju.
+ * 
+ * @author Dragica Ljubisavljevic
+ * @version 1.0
+ *
+ */
 public class KreirajKoreografaSO extends ApstraktnaSO{
-
+	/**
+	 * Promenljiva u kojoj se cuva indeks kreiranog koreografa.
+	 */
     long indeks=-1;
 
     public KreirajKoreografaSO() {
@@ -34,7 +46,13 @@ public class KreirajKoreografaSO extends ApstraktnaSO{
         }
         
     }
-
+	/**
+     * Metoda u kojoj se poziva operacija za kreiranje sloga u bazi podataka i izvrsava odgovarajuci
+     * upit nad bazom podataka.
+     * 
+     * Rezultat upita je indeks kreiranog koreografa.
+     * 
+     */
     @Override
     protected void executeOperation(Object param) throws Exception {
         indeks=repository.kreirajSlog((ApstraktniDomenskiObjekat)param);
